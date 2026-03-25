@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-5">
+                    <h1 class="fw-bold mb-4">Добавить новое объявление</h1>
+                    <p class="text-muted mb-5">
+                        Заполните форму ниже, чтобы добавить новое объявление о продаже недвижимости.
+                        Все поля, отмеченные *, обязательны для заполнения.
+                    </p>
+
+                    <form method="POST" action="{{ url_for('add_listing') }}" enctype="multipart/form-data">
+                        <!-- Основная информация -->
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-4">Основная информация</h4>
+                            
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label for="title" class="form-label">Название объявления *</label>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           id="title" name="title" required
+                                           placeholder="Например: 3-комн. квартира в центре">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="price" class="form-label">Цена (₽) *</label>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="price" name="price" required
+                                           placeholder="5000000" min="0" step="1000">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Описание *</label>
+                                <textarea class="form-control form-control-lg" 
+                                          id="description" name="description" 
+                                          rows="4" required
+                                          placeholder="Подробное описание недвижимости..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Характеристики -->
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-4">Характеристики</h4>
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="property_type" class="form-label">Тип недвижимости *</label>
+                                    <select class="form-select form-select-lg" 
+                                            id="property_type" name="property_type" required>
+                                        <option value="" selected disabled>Выберите тип</option>
+                                        <option value="apartment">Квартира</option>
+                                        <option value="house">Дом</option>
+                                        <option value="villa">Вилла</option>
+                                        <option value="commercial">Коммерческая</option>
+                                        <option value="land">Земельный участок</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="bedrooms" class="form-label">Количество комнат</label>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="bedrooms" name="bedrooms"
+                                           placeholder="3" min="0">
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <label for="bathrooms" class="form-label">Количество санузлов</label>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="bathrooms" name="bathrooms"
+                                           placeholder="2" min="0">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="area" class="form-label">Площадь (м²)</label>
+                                    <input type="number" class="form-control form-control-lg" 
+                                           id="area" name="area"
+                                           placeholder="75" min="0" step="0.1">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check mt-5">
+                                        <input type="checkbox" class="form-check-input" 
+                                               id="featured" name="featured">
+                                        <label class="form-check-label fw-bold" for="featured">
+                                            Премиум-объявление
+                                        </label>
+                                        <small class="text-muted d-block">
+                                            (Выделенное размещение на главной странице)
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Местоположение -->
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-4">Местоположение</h4>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="city" class="form-label">Город *</label>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           id="city" name="city" required
+                                           placeholder="Москва">
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label">Адрес/Район *</label>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           id="location" name="location" required
+                                           placeholder="ул. Примерная, 123">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Изображения -->
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-4">Изображения</h4>
+                            
+                            <div class="mb-4">
+                                <label for="main_image" class="form-label">Главное изображение *</label>
+                                <input type="file" class="form-control form-control-lg" 
+                                       id="main_image" name="main_image" accept="image/*">
+                                <small class="text-muted">
+                                    Рекомендуемый размер: 1200x800 px. Форматы: JPG, PNG, GIF.
+                                </small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="additional_images" class="form-label">Дополнительные изображения</label>
+                                <input type="file" class="form-control form-control-lg" 
+                                       id="additional_images" name="image_1" accept="image/*" multiple>
+                                <small class="text-muted">
+                                    Можно загрузить до 10 дополнительных изображений.
+                                </small>
+                            </div>
+
+                            <div id="imagePreview" class="row mt-3"></div>
+                        </div>
+
+                        <!-- Кнопки -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('listings') }}" class="btn btn-outline-secondary btn-lg">
+                                Отмена
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-plus me-2"></i>Добавить объявление
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Предпросмотр изображений
+document.getElementById('additional_images').addEventListener('change', function(e) {
+    const preview = document.getElementById('imagePreview');
+    preview.innerHTML = '';
+    
+    Array.from(this.files).forEach((file, index) => {
+        if (file.type.match('image.*')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 mb-3';
+                col.innerHTML = `
+                    <div class="card">
+                        <img src="${e.target.result}" class="card-img-top" style="height: 150px; object-fit: cover;">
+                        <div class="card-body p-2">
+                            <small class="text-muted">${file.name}</small>
+                        </div>
+                    </div>
+                `;
+                preview.appendChild(col);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+</script>
+{% endblock %}

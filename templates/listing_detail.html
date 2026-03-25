@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('listings') }}">Объявления</a></li>
+            <li class="breadcrumb-item active">{{ listing.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Изображения -->
+        <div class="col-lg-8 mb-4">
+            <div class="property-gallery">
+                <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) }}" 
+                     class="img-fluid rounded gallery-main" alt="{{ listing.title }}">
+            </div>
+            
+            <!-- Детали -->
+            <div class="property-details-card mt-4">
+                <h1 class="mb-3">{{ listing.title }}</h1>
+                <p class="text-muted mb-4">
+                    <i class="fas fa-map-marker-alt me-2"></i>{{ listing.location }}, {{ listing.city }}
+                </p>
+                
+                <div class="property-info-grid mb-4">
+                    <div class="info-item">
+                        <div class="info-label">Цена</div>
+                        <div class="info-value text-primary">
+                            {{ "{:,.0f}".format(listing.price) }} ₽
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Тип</div>
+                        <div class="info-value">{{ listing.property_type }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Комнат</div>
+                        <div class="info-value">
+                            <i class="fas fa-bed me-1"></i>{{ listing.bedrooms }}
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Площадь</div>
+                        <div class="info-value">{{ listing.area }} м²</div>
+                    </div>
+                </div>
+                
+                <h4 class="mb-3">Описание</h4>
+                <p class="lead">{{ listing.description }}</p>
+            </div>
+        </div>
+        
+        <!-- Боковая панель -->
+        <div class="col-lg-4">
+            <div class="card surface-card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Контактная информация</h5>
+                    
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="avatar bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">{{ listing.author.username }}</h6>
+                            {% if listing.author.is_agent %}
+                            <span class="badge bg-success">Агент</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p><i class="fas fa-envelope me-2"></i>{{ listing.author.email }}</p>
+                        {% if listing.author.phone %}
+                        <p><i class="fas fa-phone me-2"></i>{{ listing.author.phone }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <button class="btn btn-primary w-100 mb-3" data-bs-toggle="modal" data-bs-target="#contactModal">
+                        <i class="fas fa-envelope me-2"></i>Написать сообщение
+                    </button>
+                    
+                    <button class="btn btn-outline-primary w-100">
+                        <i class="fas fa-phone me-2"></i>Позвонить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

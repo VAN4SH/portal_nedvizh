@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold mb-3">О нашем портале</h1>
+        <p class="lead text-muted">Мы помогаем найти ваш идеальный дом с 2010 года</p>
+    </div>
+
+    <!-- О компании -->
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="static/images/about.jpg" 
+                 class="img-fluid rounded shadow" 
+                 alt="О компании">
+        </div>
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">Наша миссия</h2>
+            <p class="lead mb-4">
+                Мы создаем удобную и прозрачную платформу для покупки, 
+                продажи и аренды недвижимости по всей России.
+            </p>
+            <p>
+                Наш портал объединяет тысячи проверенных объявлений от собственников 
+                и агентств недвижимости. Мы тщательно проверяем каждое объявление, 
+                чтобы вы могли быть уверены в достоверности информации.
+            </p>
+        </div>
+    </div>
+
+    <!-- Преимущества -->
+    <div class="row mb-5">
+        <div class="col-lg-4 mb-4">
+            <div class="card surface-card h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-lg bg-primary text-white d-inline-flex align-items-center justify-content-center mb-4">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Безопасность</h4>
+                    <p class="text-muted">
+                        Все объявления проходят модерацию, а пользователи верификацию.
+                        Ваши данные защищены.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card surface-card h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-lg bg-primary text-white d-inline-flex align-items-center justify-content-center mb-4">
+                        <i class="fas fa-search fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Удобный поиск</h4>
+                    <p class="text-muted">
+                        Мощные фильтры и умный поиск помогут найти именно то, 
+                        что вы ищете.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="card surface-card h-100">
+                <div class="card-body text-center p-4">
+                    <div class="icon-lg bg-primary text-white d-inline-flex align-items-center justify-content-center mb-4">
+                        <i class="fas fa-headset fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Поддержка 24/7</h4>
+                    <p class="text-muted">
+                        Наша команда поддержки всегда готова помочь 
+                        с любыми вопросами.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="stats-section py-5 px-3 px-md-4 mb-5">
+        <div class="row text-center g-4">
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">10,000+</div>
+                <p class="text-muted">Объектов недвижимости</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">5,000+</div>
+                <p class="text-muted">Довольных клиентов</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">100+</div>
+                <p class="text-muted">Городов России</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">12 лет</div>
+                <p class="text-muted">На рынке</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Команда -->
+    <div class="mb-5">
+        <h2 class="fw-bold text-center mb-5">Наша команда</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card surface-card text-center">
+                    <div class="card-body p-4">
+                        <img src="static/images/petrov.png" 
+                             class="rounded-circle mb-3" 
+                             alt="Иван Петров">
+                        <h5 class="fw-bold mb-2">Иван Петров</h5>
+                        <p class="text-muted mb-3">Генеральный директор</p>
+                        <p>Основатель портала, эксперт в недвижимости с 15-летним опытом.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card surface-card text-center">
+                    <div class="card-body p-4">
+                        <img src="static/images/smirnova.jpg" 
+                             class="rounded-circle mb-3" 
+                             alt="Анна Смирнова">
+                        <h5 class="fw-bold mb-2">Анна Смирнова</h5>
+                        <p class="text-muted mb-3">Руководитель отдела продаж</p>
+                        <p>Специалист по работе с клиентами и партнерами.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card surface-card text-center">
+                    <div class="card-body p-4">
+                        <img src="static/images/ivanov.jpg" 
+                             class="rounded-circle mb-3" 
+                             alt="Дмитрий Иванов">
+                        <h5 class="fw-bold mb-2">Дмитрий Иванов</h5>
+                        <p class="text-muted mb-3">Технический директор</p>
+                        <p>Отвечает за развитие платформы и IT-инфраструктуру.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

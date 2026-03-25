@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <div class="error-page">
+        <h1 class="display-1 text-muted">404</h1>
+        <h2 class="mb-4">Страница не найдена</h2>
+        <p class="lead mb-5">Извините, запрашиваемая страница не существует или была перемещена.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+            <i class="fas fa-home me-2"></i>На главную
+        </a>
+    </div>
+</div>
+{% endblock %}

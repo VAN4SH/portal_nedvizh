@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-5">
+        <div class="col-md-8">
+            <h1 class="fw-bold mb-3">Все объявления</h1>
+            <p class="text-muted">Найдено {{ pagination.total if pagination else listings|length }} объявлений</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{{ url_for('add_listing') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Добавить объявление
+            </a>
+        </div>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="card filter-section mb-5">
+        <div class="card-body">
+            <form id="filterForm" method="get" action="{{ url_for('listings') }}">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <select class="form-select" name="type">
+                            <option value="all" {% if request.args.get('type', 'all') == 'all' %}selected{% endif %}>Все типы</option>
+                            <option value="apartment" {% if request.args.get('type') == 'apartment' %}selected{% endif %}>Квартира</option>
+                            <option value="house" {% if request.args.get('type') == 'house' %}selected{% endif %}>Дом</option>
+                            <option value="villa" {% if request.args.get('type') == 'villa' %}selected{% endif %}>Вилла</option>
+                            <option value="commercial" {% if request.args.get('type') == 'commercial' %}selected{% endif %}>Коммерческая</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" placeholder="Город" name="city" 
+                               value="{{ request.args.get('city', '') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" placeholder="Мин. цена" name="min_price"
+                               value="{{ request.args.get('min_price', '') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" placeholder="Макс. цена" name="max_price"
+                               value="{{ request.args.get('max_price', '') }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-2"></i>Поиск
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Список объявлений -->
+    {% if listings %}
+    <div class="row">
+        {% for listing in listings %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card property-card card-hover h-100">
+                <div class="position-relative">
+                    <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) if listing.main_image else url_for('static', filename='images/default-property.jpg') }}" 
+                         class="card-img-top property-img" alt="{{ listing.title }}"
+                         style="height: 250px; object-fit: cover;">
+                    {% if listing.featured %}
+                    <span class="property-badge">Премиум</span>
+                    {% endif %}
+                    <button class="btn favorite-btn position-absolute" style="top: 15px; left: 15px;">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ listing.title }}</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-map-marker-alt me-1"></i>{{ listing.location }}, {{ listing.city }}
+                    </p>
+                    <div class="property-price mt-auto">{{ "{:,.0f}".format(listing.price) }} ₽</div>
+                    <div class="property-features mt-3">
+                        <div class="property-feature">
+                            <i class="fas fa-bed"></i>
+                            <span>{{ listing.bedrooms or 0 }} комн.</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-bath"></i>
+                            <span>{{ listing.bathrooms or 0 }} сан.</span>
+                        </div>
+                        <div class="property-feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>{{ listing.area or 0 }} м²</span>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ url_for('listing_detail', listing_id=listing.id) }}" 
+                           class="btn btn-outline-primary w-100">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <small class="text-muted">
+                        <i class="far fa-clock me-1"></i>
+                        {{ listing.created_at.strftime('%d.%m.%Y') if listing.created_at else '' }}
+                    </small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Навигация по страницам">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('listings', page=pagination.prev_num, **request.args) }}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page in pagination.iter_pages(left_edge=2, left_current=2, right_current=2, right_edge=2) %}
+                {% if page %}
+                    <li class="page-item {% if page == pagination.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('listings', page=page, **request.args) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('listings', page=pagination.next_num, **request.args) }}">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div class="text-center py-5">
+        <div class="empty-state">
+            <i class="fas fa-home fa-4x text-muted mb-4"></i>
+            <h3>Объявления не найдены</h3>
+            <p class="text-muted mb-4">Попробуйте изменить параметры поиска</p>
+            <a href="{{ url_for('listings') }}" class="btn btn-primary">Сбросить фильтры</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Боковая панель профиля -->
+        <div class="col-lg-4 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <!-- Аватар -->
+                    <div class="avatar bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                         style="width: 100px; height: 100px; font-size: 2.5rem;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-1">{{ user.username }}</h4>
+                    <p class="text-muted mb-3">{{ user.email }}</p>
+                    
+                    {% if user.is_agent %}
+                    <span class="badge bg-success mb-3">Агент по недвижимости</span>
+                    {% else %}
+                    <span class="badge bg-secondary mb-3">Пользователь</span>
+                    {% endif %}
+                    
+                    <div class="mb-4">
+                        <p class="mb-1">
+                            <i class="fas fa-phone me-2"></i>
+                            {{ user.phone if user.phone else 'Не указан' }}
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            На сайте с {{ user.created_at.strftime('%d.%m.%Y') if user.created_at else 'недавно' }}
+                        </p>
+                    </div>
+                    
+                    <a href="{{ url_for('edit_profile') }}" class="btn btn-outline-primary w-100 mb-2">
+                        <i class="fas fa-edit me-2"></i>Редактировать профиль
+                    </a>
+                    
+                    <a href="{{ url_for('add_listing') }}" class="btn btn-primary w-100">
+                        <i class="fas fa-plus me-2"></i>Добавить объявление
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Статистика -->
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">Статистика</h5>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Всего объявлений:</span>
+                        <span class="fw-bold">{{ user.listings|length }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Активные:</span>
+                        <span class="fw-bold text-success">{{ user.listings|length }}</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <span>Премиум:</span>
+                        <span class="fw-bold text-warning">
+                            {{ user.listings|selectattr('featured', 'equalto', True)|list|length }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Основной контент -->
+        <div class="col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold">Мой профиль</h2>
+                <a href="{{ url_for('my_listings') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-list me-2"></i>Мои объявления
+                </a>
+            </div>
+            
+            <!-- Информация о профиле -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Информация о профиле</h4>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Имя пользователя</label>
+                            <p class="fs-5 fw-bold">{{ user.username }}</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Email</label>
+                            <p class="fs-5 fw-bold">{{ user.email }}</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Телефон</label>
+                            <p class="fs-5 fw-bold">{{ user.phone if user.phone else 'Не указан' }}</p>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label text-muted">Статус</label>
+                            <p class="fs-5 fw-bold">
+                                {% if user.is_agent %}
+                                <span class="badge bg-success">Агент</span>
+                                {% else %}
+                                <span class="badge bg-secondary">Пользователь</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Последние объявления -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h4 class="fw-bold mb-0">Последние объявления</h4>
+                        <a href="{{ url_for('my_listings') }}" class="btn btn-link">
+                            Все объявления <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    
+                    {% if user.listings %}
+                    <div class="row">
+                        {% for listing in user.listings[:3] %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card border h-100">
+                                <div class="row g-0">
+                                    <div class="col-md-5">
+                                        <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) if listing.main_image else url_for('static', filename='images/default-property.jpg') }}" 
+                                             class="img-fluid rounded-start h-100" 
+                                             style="object-fit: cover; height: 150px;"
+                                             alt="{{ listing.title }}">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body">
+                                            <h6 class="card-title fw-bold">{{ listing.title|truncate(40) }}</h6>
+                                            <p class="card-text small text-muted mb-1">
+                                                <i class="fas fa-map-marker-alt me-1"></i>{{ listing.city }}
+                                            </p>
+                                            <p class="card-text">
+                                                <span class="fw-bold text-primary">{{ "{:,.0f}".format(listing.price) }} ₽</span>
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <small class="text-muted">
+                                                    {{ listing.created_at.strftime('%d.%m.%Y') if listing.created_at else '' }}
+                                                </small>
+                                                <a href="{{ url_for('listing_detail', listing_id=listing.id) }}" 
+                                                   class="btn btn-sm btn-outline-primary">
+                                                    Подробнее
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-home fa-3x text-muted mb-3"></i>
+                        <h5>У вас пока нет объявлений</h5>
+                        <p class="text-muted mb-4">Начните продавать недвижимость прямо сейчас!</p>
+                        <a href="{{ url_for('add_listing') }}" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>Добавить первое объявление
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Контактная форма -->
+        <div class="col-lg-8 mb-5 mb-lg-0">
+            <div class="card contact-form shadow-sm border-0">
+                <div class="card-body p-5">
+                    <h2 class="fw-bold mb-4">Свяжитесь с нами</h2>
+                    <p class="text-muted mb-4">
+                        Есть вопросы или предложения? Заполните форму ниже, 
+                        и мы свяжемся с вами в ближайшее время.
+                    </p>
+
+                    <form method="POST" action="{{ url_for('contact') }}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Имя *</label>
+                                <input type="text" class="form-control form-control-lg" 
+                                       id="name" name="name" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" class="form-control form-control-lg" 
+                                       id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Тема</label>
+                            <input type="text" class="form-control form-control-lg" 
+                                   id="subject" name="subject">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Сообщение *</label>
+                            <textarea class="form-control form-control-lg" 
+                                      id="message" name="message" 
+                                      rows="5" required></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Отправить сообщение
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контактная информация -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Контактная информация</h4>
+                    
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Адрес</h6>
+                            <p class="text-muted mb-0">
+                                Москва, ул. Примерная, 123<br>
+                                Бизнес-центр "Экспо"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Телефон</h6>
+                            <p class="text-muted mb-0">
+                                +7 (999) 123-45-67<br>
+                                Пн-Пт: 9:00-18:00
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start mb-4">
+                        <div class="icon-sm bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email</h6>
+                            <p class="text-muted mb-0">
+                                info@realestatepro.ru<br>
+                                support@realestatepro.ru
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карта -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h4 class="fw-bold mb-4">Мы на карте</h4>
+                    <div id="map" style="height: 300px; border-radius: 8px; overflow: hidden;">
+                        <img src="static/images/karta.png" 
+                             class="img-fluid rounded" 
+                             alt="Карта">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.icon-sm {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+</style>
+{% endblock %}

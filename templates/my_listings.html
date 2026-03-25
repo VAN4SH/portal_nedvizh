@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}Мои объявления — Недвижимость Pro{% endblock %}
+
+{% block content %}
+<div class="container py-5 my-listings-page">
+    <header class="my-listings-head surface-card mb-4">
+        <div class="my-listings-head__text">
+            <p class="section-eyebrow mb-1">Личный кабинет</p>
+            <h1 class="section-title fw-bold mb-2">Мои объявления</h1>
+            <p class="text-muted mb-0">Просматривайте, редактируйте и удаляйте свои карточки объектов.</p>
+        </div>
+        <a href="{{ url_for('add_listing') }}" class="btn btn-add-listing">
+            <span class="btn-add-listing__icon" aria-hidden="true"><i class="fas fa-plus"></i></span>
+            <span class="btn-add-listing__label">Добавить объявление</span>
+        </a>
+    </header>
+
+    {% if listings %}
+    <div class="surface-card overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle my-listings-table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">Объявление</th>
+                        <th scope="col">Тип</th>
+                        <th scope="col">Местоположение</th>
+                        <th scope="col">Цена</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col" class="text-end">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for listing in listings %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) if listing.main_image else url_for('static', filename='images/default-property.jpg') }}"
+                                     class="my-listings-thumb rounded-3 flex-shrink-0"
+                                     width="64" height="64"
+                                     alt="{{ listing.title }}">
+                                <div class="min-w-0">
+                                    <div class="fw-semibold text-truncate" style="max-width: 220px;">{{ listing.title }}</div>
+                                    <small class="text-muted">{{ listing.bedrooms or 0 }} комн. · {{ listing.area or 0 }} м²</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill my-listings-type">{{ listing.property_type }}</span>
+                        </td>
+                        <td>
+                            <div class="small fw-medium">{{ listing.city }}</div>
+                            <small class="text-muted">{{ listing.location|truncate(28) }}</small>
+                        </td>
+                        <td>
+                            <span class="fw-bold text-primary">{{ "{:,.0f}".format(listing.price) }} ₽</span>
+                        </td>
+                        <td>
+                            {% if listing.featured %}
+                            <span class="badge rounded-pill bg-warning text-dark">Премиум</span>
+                            {% else %}
+                            <span class="badge rounded-pill my-listings-status-active">Активно</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <small class="text-muted">{{ listing.created_at.strftime('%d.%m.%Y') if listing.created_at else '—' }}</small>
+                        </td>
+                        <td class="text-end">
+                            <div class="d-flex flex-wrap justify-content-end gap-1 my-listings-actions">
+                                <a href="{{ url_for('listing_detail', listing_id=listing.id) }}"
+                                   class="btn btn-sm btn-outline-primary"
+                                   title="Просмотр">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{{ url_for('edit_listing', listing_id=listing.id) }}"
+                                   class="btn btn-sm btn-outline-secondary"
+                                   title="Редактировать">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ url_for('delete_listing', listing_id=listing.id) }}"
+                                      class="d-inline"
+                                      onsubmit="return confirm('Удалить это объявление?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Удалить">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if pagination and pagination.pages > 1 %}
+    <nav aria-label="Навигация по страницам" class="mt-4">
+        <ul class="pagination justify-content-center mb-0">
+            {% if pagination.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('my_listings', page=pagination.prev_num) }}">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page in pagination.iter_pages(left_edge=2, left_current=2, right_current=2, right_edge=2) %}
+                {% if page %}
+                    <li class="page-item {% if page == pagination.page %}active{% endif %}">
+                        <a class="page-link" href="{{ url_for('my_listings', page=page) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">…</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('my_listings', page=pagination.next_num) }}">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    {% else %}
+    <div class="surface-card text-center py-5 px-4 my-listings-empty">
+        <div class="my-listings-empty__icon mb-4">
+            <i class="fas fa-home"></i>
+        </div>
+        <h3 class="fw-bold mb-2">Пока нет объявлений</h3>
+        <p class="text-muted mb-4 mx-auto" style="max-width: 26rem;">Создайте первую карточку — покупатели увидят её в каталоге и на главной (если выберете премиум).</p>
+        <a href="{{ url_for('add_listing') }}" class="btn btn-add-listing btn-add-listing--lg">
+            <span class="btn-add-listing__icon" aria-hidden="true"><i class="fas fa-plus"></i></span>
+            <span class="btn-add-listing__label">Добавить объявление</span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

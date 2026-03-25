@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Редактировать объявление — Недвижимость Pro{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card auth-card border-0">
+                <div class="card-body p-4 p-md-5">
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start gap-3 mb-4">
+                        <div>
+                            <p class="section-eyebrow mb-1">Редактирование</p>
+                            <h1 class="section-title fw-bold mb-2">Изменить объявление</h1>
+                            <p class="text-muted mb-0 small">Обновите данные и сохраните — изменения сразу появятся на сайте.</p>
+                        </div>
+                        <a href="{{ url_for('my_listings') }}" class="btn btn-outline-secondary flex-shrink-0">
+                            <i class="fas fa-arrow-left me-2"></i>К моим объявлениям
+                        </a>
+                    </div>
+
+                    <form method="POST" action="{{ url_for('edit_listing', listing_id=listing.id) }}" enctype="multipart/form-data">
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-3">Основная информация</h4>
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label for="title" class="form-label">Название *</label>
+                                    <input type="text" class="form-control form-control-lg" id="title" name="title" required
+                                           value="{{ listing.title }}"
+                                           placeholder="Например: 3-комн. квартира в центре">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="price" class="form-label">Цена (₽) *</label>
+                                    <input type="number" class="form-control form-control-lg" id="price" name="price" required
+                                           value="{{ listing.price|int if listing.price is not none else '' }}"
+                                           min="0" step="1000" placeholder="5000000">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Описание *</label>
+                                <textarea class="form-control form-control-lg" id="description" name="description" rows="4" required
+                                          placeholder="Подробное описание...">{{ listing.description or '' }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-3">Характеристики</h4>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="property_type" class="form-label">Тип недвижимости *</label>
+                                    <select class="form-select form-select-lg" id="property_type" name="property_type" required>
+                                        {% set t = listing.property_type or 'apartment' %}
+                                        <option value="apartment" {% if t == 'apartment' %}selected{% endif %}>Квартира</option>
+                                        <option value="house" {% if t == 'house' %}selected{% endif %}>Дом</option>
+                                        <option value="villa" {% if t == 'villa' %}selected{% endif %}>Вилла</option>
+                                        <option value="commercial" {% if t == 'commercial' %}selected{% endif %}>Коммерческая</option>
+                                        <option value="land" {% if t == 'land' %}selected{% endif %}>Земельный участок</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="bedrooms" class="form-label">Комнат</label>
+                                    <input type="number" class="form-control form-control-lg" id="bedrooms" name="bedrooms"
+                                           value="{{ listing.bedrooms if listing.bedrooms is not none else '' }}"
+                                           min="0" placeholder="3">
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="bathrooms" class="form-label">Санузлов</label>
+                                    <input type="number" class="form-control form-control-lg" id="bathrooms" name="bathrooms"
+                                           value="{{ listing.bathrooms if listing.bathrooms is not none else '' }}"
+                                           min="0" placeholder="2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="area" class="form-label">Площадь (м²)</label>
+                                    <input type="number" class="form-control form-control-lg" id="area" name="area"
+                                           value="{{ listing.area if listing.area is not none else '' }}"
+                                           min="0" step="0.1" placeholder="75">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-check mt-md-4 pt-md-2">
+                                        <input type="checkbox" class="form-check-input" id="featured" name="featured"
+                                               {% if listing.featured %}checked{% endif %}>
+                                        <label class="form-check-label fw-semibold" for="featured">Премиум на главной</label>
+                                        <small class="text-muted d-block">Выделенное размещение в блоке премиум-объявлений</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-3">Местоположение</h4>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="city" class="form-label">Город *</label>
+                                    <input type="text" class="form-control form-control-lg" id="city" name="city" required
+                                           value="{{ listing.city or '' }}" placeholder="Москва">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label">Адрес / район *</label>
+                                    <input type="text" class="form-control form-control-lg" id="location" name="location" required
+                                           value="{{ listing.location or '' }}" placeholder="ул. Примерная, 123">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="fw-bold mb-3">Главное фото</h4>
+                            {% if listing.main_image %}
+                            <div class="d-flex align-items-center gap-3 mb-3 p-3 rounded-3 edit-listing-photo-preview">
+                                <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) }}"
+                                     alt="Текущее фото объявления" class="rounded-3 flex-shrink-0"
+                                     style="width: 120px; height: 80px; object-fit: cover;">
+                                <p class="small text-muted mb-0">Текущее изображение. Загрузите новый файл ниже, чтобы заменить его.</p>
+                            </div>
+                            {% endif %}
+                            <label for="main_image" class="form-label">Новое изображение</label>
+                            <input type="file" class="form-control form-control-lg" id="main_image" name="main_image" accept="image/*">
+                            <small class="text-muted">Необязательно — оставьте пустым, если фото менять не нужно.</small>
+                        </div>
+
+                        <div class="d-flex flex-column flex-sm-row justify-content-between gap-3 pt-2">
+                            <a href="{{ url_for('listing_detail', listing_id=listing.id) }}" class="btn btn-outline-secondary btn-lg order-2 order-sm-1">
+                                Отмена
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg order-1 order-sm-2">
+                                <i class="fas fa-save me-2"></i>Сохранить изменения
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

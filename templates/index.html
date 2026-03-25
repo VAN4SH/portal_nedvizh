@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero главной: стили только .home-hero / .hero--landing — остальные страницы не затрагиваются -->
+<section class="hero hero--landing home-hero slide-in-left" aria-label="Главный экран">
+    <div class="home-hero__layers" aria-hidden="true">
+        <div class="home-hero__mesh"></div>
+        <span class="home-hero__orb home-hero__orb--1"></span>
+        <span class="home-hero__orb home-hero__orb--2"></span>
+        <span class="home-hero__orb home-hero__orb--3"></span>
+        <div class="home-hero__vignette"></div>
+    </div>
+    <div class="container position-relative">
+        <div class="row align-items-center justify-content-lg-start">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <div class="home-hero__copy text-lg-start">
+                    <p class="home-hero__eyebrow">Недвижимость Pro · вся Россия</p>
+                    <h1 class="hero__title home-hero__title">
+                        Найдите свой <span class="home-hero__title-highlight">идеальный дом</span>
+                    </h1>
+                    <p class="hero__lead home-hero__lead mb-0">
+                        Более 1000 объектов по всей России — квартиры, дома и виллы с понятными карточками и фильтрами. Выберите формат жизни, который вам подходит.
+                    </p>
+                    <ul class="home-hero__chips" aria-label="О сервисе в двух словах">
+                        <li>1000+ объектов</li>
+                        <li>Умные фильтры</li>
+                        <li>Понятные карточки</li>
+                    </ul>
+                    <div class="hero__actions home-hero__cta-row mt-4">
+                        <a href="{{ url_for('listings') }}" class="btn btn-primary btn-lg home-hero__btn-primary">
+                            <i class="fas fa-search me-2"></i>Найти недвижимость
+                        </a>
+                        <a href="{{ url_for('add_listing') }}" class="btn btn-outline-light btn-lg home-hero__btn-secondary">
+                            <i class="fas fa-plus me-2"></i>Добавить объявление
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search Section -->
+<section class="container mb-5 home-below-hero fade-in-up" aria-label="Быстрый поиск">
+    <div class="filter-section">
+        <form id="filterForm" action="{{ url_for('listings') }}" method="get">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <select class="form-select" name="type">
+                        <option value="all">Все типы</option>
+                        <option value="apartment">Квартира</option>
+                        <option value="house">Дом</option>
+                        <option value="villa">Вилла</option>
+                        <option value="commercial">Коммерческая</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Город" name="city">
+                </div>
+                <div class="col-md-3">
+                    <input type="number" class="form-control" placeholder="Мин. цена" name="min_price">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search me-2"></i>Найти
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Featured Properties -->
+<section class="container mb-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+        <div>
+            <p class="section-eyebrow mb-0">Подборка</p>
+            <h2 class="section-title fw-bold mb-0">Премиум объявления</h2>
+        </div>
+        <a href="{{ url_for('listings') }}" class="btn btn-link">Смотреть все <i class="fas fa-arrow-right"></i></a>
+    </div>
+    
+    <div class="row">
+        {% for listing in featured_listings %}
+        <div class="col-lg-4 col-md-6">
+            <a href="{{ url_for('listing_detail', listing_id=listing.id) }}" class="text-decoration-none">
+                <div class="card property-card card-hover">
+                    <div class="position-relative">
+                        <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) if listing.main_image else 'https://via.placeholder.com/400x250' }}" 
+                             class="card-img-top property-img" alt="{{ listing.title }}">
+                        <span class="property-badge">Премиум</span>
+                        <button class="btn favorite-btn position-absolute" style="top: 15px; left: 15px;">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ listing.title }}</h5>
+                        <p class="card-text text-muted">{{ listing.location }}</p>
+                        <div class="property-price">{{ "{:,.0f}".format(listing.price) }} ₽</div>
+                        <div class="property-features">
+                            <div class="property-feature">
+                                <i class="fas fa-bed"></i>
+                                <span>{{ listing.bedrooms }} комн.</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-bath"></i>
+                                <span>{{ listing.bathrooms }} сан.</span>
+                            </div>
+                            <div class="property-feature">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>{{ listing.area }} м²</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Latest Properties -->
+<section class="container mb-5">
+    <p class="section-eyebrow mb-0">Свежие лоты</p>
+    <h2 class="section-title fw-bold mb-4">Новые объявления</h2>
+    <div class="row">
+        {% for listing in latest_listings %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <a href="{{ url_for('listing_detail', listing_id=listing.id) }}" class="text-decoration-none">
+                <div class="card property-card scale-in">
+                    <img src="{{ url_for('static', filename='images/properties/' + listing.main_image) if listing.main_image else 'https://via.placeholder.com/400x250' }}" 
+                         class="card-img-top property-img" alt="{{ listing.title }}">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ listing.title|truncate(30) }}</h6>
+                        <p class="text-muted small mb-2">{{ listing.city }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">{{ "{:,.0f}".format(listing.price) }} ₽</span>
+                            <span class="badge bg-light text-dark">
+                                <i class="fas fa-map-marker-alt me-1"></i>{{ listing.property_type }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="container py-5 mb-5 fade-in-up">
+    <div class="stats-section py-5 px-3 px-md-4">
+        <div class="row text-center g-4">
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">1000+</div>
+                <p class="text-muted">Объектов недвижимости</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">500+</div>
+                <p class="text-muted">Довольных клиентов</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">50+</div>
+                <p class="text-muted">Городов России</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="display-4 fw-bold text-primary">24/7</div>
+                <p class="text-muted">Поддержка клиентов</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
