@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" modified="2026-04-29T10:16:00.000Z" agent="Cursor" version="24.7.17">
+  <diagram id="use-case" name="Диаграмма вариантов использования">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="system" value="Веб-приложение «Недвижимость Pro»" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#666666;dashed=1;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="300" y="70" width="880" height="780" as="geometry"/>
+        </mxCell>
+        <mxCell id="guest" value="Гость" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="60" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="user" value="Пользователь" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="450" width="60" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="agent" value="Агент / продавец" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="450" width="70" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="storage" value="SQLite БД и файловое хранилище изображений" style="shape=cylinder3d;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="170" width="180" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_view_home" value="Просмотреть главную страницу" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="390" y="130" width="210" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_search" value="Искать и фильтровать объявления" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="670" y="130" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_detail" value="Просмотреть карточку объекта" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="520" y="230" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_contact" value="Отправить сообщение через форму контактов" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="810" y="230" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_register" value="Зарегистрироваться" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="390" y="340" width="210" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_login" value="Авторизоваться" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="680" y="340" width="210" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_profile" value="Просмотреть личный кабинет" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="390" y="470" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_edit_profile" value="Редактировать профиль" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="690" y="470" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_my_listings" value="Управлять своими объявлениями" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="490" y="590" width="260" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_add" value="Добавить объявление" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="850" y="570" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_edit" value="Редактировать объявление" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="840" y="660" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_delete" value="Удалить объявление" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="850" y="750" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_guest_home" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_view_home"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_guest_search" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_search"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_guest_detail" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_detail"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_guest_contact" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_contact"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_guest_register" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_guest_login" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="guest" target="uc_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_user_profile" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="user" target="uc_profile"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_user_edit_profile" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="user" target="uc_edit_profile"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_user_my" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="user" target="uc_my_listings"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_agent_add" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="agent" target="uc_add"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_agent_edit" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="agent" target="uc_edit"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_agent_delete" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="agent" target="uc_delete"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_user_generalization" value="является" style="endArrow=block;endFill=0;html=1;rounded=0;" edge="1" parent="1" source="agent" target="user"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_db1" style="endArrow=open;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="uc_search" target="storage"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_db2" style="endArrow=open;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="uc_add" target="storage"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_db3" style="endArrow=open;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="uc_edit" target="storage"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_db4" style="endArrow=open;html=1;rounded=0;dashed=1;" edge="1" parent="1" source="uc_delete" target="storage"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

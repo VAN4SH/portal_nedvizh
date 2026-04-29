@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2026-04-29T10:16:00.000Z" agent="Cursor" version="24.7.17">
+  <diagram id="class-diagram" name="Диаграмма классов">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;&lt;br&gt;- id: Integer&lt;br&gt;- username: String&lt;br&gt;- email: String&lt;br&gt;- password_hash: String&lt;br&gt;- phone: String&lt;br&gt;- is_agent: Boolean&lt;br&gt;- created_at: DateTime&lt;hr&gt;+ set_password(password)&lt;br&gt;+ check_password(password): Boolean&lt;br&gt;+ is_authenticated: Boolean" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="140" y="140" width="330" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="Listing" value="&lt;b&gt;Listing&lt;/b&gt;&lt;br&gt;- id: Integer&lt;br&gt;- title: String&lt;br&gt;- description: Text&lt;br&gt;- price: Float&lt;br&gt;- property_type: String&lt;br&gt;- bedrooms: Integer&lt;br&gt;- bathrooms: Integer&lt;br&gt;- area: Float&lt;br&gt;- location: String&lt;br&gt;- city: String&lt;br&gt;- featured: Boolean&lt;br&gt;- main_image: String&lt;br&gt;- images: Text(JSON)&lt;br&gt;- user_id: Integer&lt;br&gt;- created_at: DateTime&lt;br&gt;- updated_at: DateTime" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="110" width="360" height="330" as="geometry"/>
+        </mxCell>
+        <mxCell id="Config" value="&lt;b&gt;Config&lt;/b&gt;&lt;br&gt;- SECRET_KEY: String&lt;br&gt;- SQLALCHEMY_DATABASE_URI: String&lt;br&gt;- SQLALCHEMY_TRACK_MODIFICATIONS: Boolean&lt;br&gt;- UPLOAD_FOLDER: String&lt;br&gt;- MAX_CONTENT_LENGTH: Integer&lt;br&gt;- ALLOWED_EXTENSIONS: Set&lt;String&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="120" width="320" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="FlaskApp" value="&lt;b&gt;Flask app&lt;/b&gt;&lt;br&gt;+ index()&lt;br&gt;+ listings()&lt;br&gt;+ listing_detail(id)&lt;br&gt;+ add_listing()&lt;br&gt;+ login()&lt;br&gt;+ register()&lt;br&gt;+ profile()&lt;br&gt;+ my_listings()&lt;br&gt;+ edit_listing(id)&lt;br&gt;+ delete_listing(id)&lt;br&gt;+ edit_profile()&lt;br&gt;+ get_cities()&lt;br&gt;+ get_property_types()" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="180" y="580" width="340" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="LoginManager" value="&lt;b&gt;LoginManager&lt;/b&gt;&lt;br&gt;+ init_app(app)&lt;br&gt;+ user_loader(user_id)&lt;br&gt;+ login_user(user)&lt;br&gt;+ logout_user()&lt;br&gt;+ login_required" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="640" y="600" width="300" height="170" as="geometry"/>
+        </mxCell>
+        <mxCell id="SQLAlchemy" value="&lt;b&gt;SQLAlchemy db&lt;/b&gt;&lt;br&gt;+ Model&lt;br&gt;+ Column&lt;br&gt;+ relationship&lt;br&gt;+ session.add()&lt;br&gt;+ session.commit()&lt;br&gt;+ session.rollback()&lt;br&gt;+ create_all()" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="570" width="320" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_user_listing" value="1 владелец / 0..* объявлений" style="endArrow=ERmany;startArrow=ERone;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="User" target="Listing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_app_user" value="использует" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="FlaskApp" target="User">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_app_listing" value="CRUD" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="FlaskApp" target="Listing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_app_config" value="читает настройки" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="FlaskApp" target="Config">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_login_user" value="загружает пользователя" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="LoginManager" target="User">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_db_models" value="отображение ORM" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="SQLAlchemy" target="Listing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_db_user" value="отображение ORM" style="endArrow=open;html=1;rounded=0;dashed=1;fontSize=12;" edge="1" parent="1" source="SQLAlchemy" target="User">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
