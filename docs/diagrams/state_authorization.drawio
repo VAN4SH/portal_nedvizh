@@ -1,54 +1,113 @@
-<mxfile host="app.diagrams.net" modified="2026-04-29T10:16:00.000Z" agent="Cursor" version="24.7.17">
+<mxfile host="app.diagrams.net" modified="2026-04-29T10:29:00.000Z" agent="Cursor" version="24.7.17">
   <diagram id="state-auth" name="Диаграмма состояний Авторизация">
-    <mxGraphModel dx="1100" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1500" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Состояния процесса регистрации и авторизации пользователя" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="310" y="40" width="760" height="40" as="geometry"/>
+        <mxCell id="title" value="Состояния процесса регистрации и авторизации пользователя" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="330" y="35" width="1040" height="45" as="geometry"/>
         </mxCell>
-        <mxCell id="start" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="1">
-          <mxGeometry x="120" y="210" width="30" height="30" as="geometry"/>
+        <mxCell id="start" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="95" y="290" width="34" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="guest" value="Гость" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="230" y="185" width="170" height="80" as="geometry"/>
+        <mxCell id="guest" value="Гость&lt;br&gt;неавторизованный посетитель" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="200" y="265" width="220" height="85" as="geometry"/>
         </mxCell>
-        <mxCell id="login_form" value="Форма входа&lt;br&gt;/login" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="500" y="120" width="190" height="80" as="geometry"/>
+        <mxCell id="login_form" value="Форма входа&lt;br&gt;/login" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="165" width="230" height="85" as="geometry"/>
         </mxCell>
-        <mxCell id="register_form" value="Форма регистрации&lt;br&gt;/register" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="500" y="320" width="190" height="80" as="geometry"/>
+        <mxCell id="register_form" value="Форма регистрации&lt;br&gt;/register" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="540" y="410" width="230" height="85" as="geometry"/>
         </mxCell>
-        <mxCell id="validate" value="Проверка введенных данных" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="800" y="210" width="190" height="120" as="geometry"/>
+        <mxCell id="validate_login" value="Проверка email&lt;br&gt;и пароля" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="910" y="145" width="210" height="125" as="geometry"/>
         </mxCell>
-        <mxCell id="error" value="Ошибка валидации&lt;br&gt;flash-сообщение" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="800" y="450" width="190" height="80" as="geometry"/>
+        <mxCell id="validate_register" value="Проверка данных&lt;br&gt;регистрации" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;spacing=6;" vertex="1" parent="1">
+          <mxGeometry x="910" y="390" width="210" height="125" as="geometry"/>
         </mxCell>
-        <mxCell id="authenticated" value="Авторизованный пользователь&lt;br&gt;Flask-Login session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="230" width="220" height="90" as="geometry"/>
+        <mxCell id="error_login" value="Ошибка входа&lt;br&gt;flash-сообщение" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="895" y="40" width="240" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="profile" value="Доступ к личному кабинету,&lt;br&gt;добавлению и управлению объявлениями" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="400" width="220" height="90" as="geometry"/>
+        <mxCell id="error_register" value="Ошибка регистрации&lt;br&gt;возврат к форме" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="895" y="590" width="240" height="75" as="geometry"/>
         </mxCell>
-        <mxCell id="logout" value="Выход из системы&lt;br&gt;/logout" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="500" y="580" width="190" height="80" as="geometry"/>
+        <mxCell id="create_user" value="Создание пользователя&lt;br&gt;и хэширование пароля" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="410" width="250" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="authenticated" value="Авторизованный пользователь&lt;br&gt;Flask-Login session" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="215" width="250" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="protected" value="Доступ к защищенным разделам&lt;br&gt;профиль, мои объявления, добавление" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="650" width="300" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="logout" value="Выход из системы&lt;br&gt;/logout" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;spacing=8;" vertex="1" parent="1">
+          <mxGeometry x="545" y="715" width="220" height="85" as="geometry"/>
         </mxCell>
         <mxCell id="end" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="120" y="605" width="30" height="30" as="geometry"/>
+          <mxGeometry x="95" y="740" width="34" height="34" as="geometry"/>
         </mxCell>
-        <mxCell id="e_start" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="start" target="guest"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_guest_login" value="выбор входа" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="guest" target="login_form"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_guest_register" value="создание аккаунта" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="guest" target="register_form"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_login_validate" value="POST email/password" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="login_form" target="validate"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_register_validate" value="POST данные профиля" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="register_form" target="validate"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_validate_success" value="данные корректны" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="validate" target="authenticated"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_validate_error" value="ошибка" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="validate" target="error"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_error_login" value="повтор ввода" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="error" target="login_form"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_auth_profile" value="переход в защищенный раздел" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="authenticated" target="profile"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_profile_logout" value="logout_user()" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="profile" target="logout"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_logout_guest" value="сессия завершена" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="logout" target="guest"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="e_end" style="endArrow=block;html=1;rounded=0;" edge="1" parent="1" source="logout" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="start" target="guest">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_guest_login" value="выбор входа" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="guest" target="login_form">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="480" y="207"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_guest_register" value="создание аккаунта" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="guest" target="register_form">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="480" y="452"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_login_validate" value="POST email/password" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="login_form" target="validate_login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_register_validate" value="POST данные профиля" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="register_form" target="validate_register">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_login_error" value="ошибка" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="validate_login" target="error_login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_error_login_back" value="повтор ввода" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="error_login" target="login_form">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="655" y="78"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_login_success" value="успех" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="validate_login" target="authenticated">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_register_error" value="ошибка" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="validate_register" target="error_register">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_error_register_back" value="повтор ввода" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="error_register" target="register_form">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="655" y="628"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_register_success" value="данные корректны" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="validate_register" target="create_user">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_create_auth" value="login_user()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="create_user" target="authenticated">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1345" y="345"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_auth_protected" value="открытие защищенного раздела" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="authenticated" target="protected">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_protected_logout" value="logout_user()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="protected" target="logout">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="1340" y="850"/><mxPoint x="655" y="850"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_logout_guest" value="сессия завершена" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=12;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="logout" target="guest">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="310" y="757"/></Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;" edge="1" parent="1" source="logout" target="end">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

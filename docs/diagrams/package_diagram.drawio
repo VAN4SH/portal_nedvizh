@@ -1,53 +1,81 @@
-<mxfile host="app.diagrams.net" modified="2026-04-29T10:16:00.000Z" agent="Cursor" version="24.7.17">
-  <diagram id="packages" name="Диаграмма пакетов">
-    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+<mxfile host="app.diagrams.net" modified="2026-04-29T10:29:00.000Z" agent="Cursor" version="24.7.17">
+  <diagram id="packages-neat" name="Диаграмма пакетов">
+    <mxGraphModel dx="1600" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1900" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="client" value="Клиентский уровень&#xa;браузер пользователя" style="shape=folder;tabWidth=120;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="100" width="310" height="180" as="geometry"/>
+        <mxCell id="title" value="Диаграмма пакетов веб-приложения «Недвижимость Pro»" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="30" width="980" height="50" as="geometry"/>
         </mxCell>
-        <mxCell id="templates" value="templates&#xa;Jinja2-шаблоны страниц" style="shape=folder;tabWidth=90;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="540" y="80" width="300" height="170" as="geometry"/>
+        <mxCell id="client" value="Клиентский уровень&#xa;браузер пользователя&#xa;&#xa;• отображение HTML&#xa;• отправка форм&#xa;• загрузка CSS/JS/изображений" style="shape=folder;tabWidth=145;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="180" width="350" height="240" as="geometry"/>
         </mxCell>
-        <mxCell id="static" value="static&#xa;CSS, JavaScript, изображения" style="shape=folder;tabWidth=90;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="540" y="310" width="300" height="170" as="geometry"/>
+        <mxCell id="templates" value="templates&#xa;Jinja2-шаблоны&#xa;&#xa;• base.html&#xa;• index.html&#xa;• listings.html&#xa;• profile.html&#xa;• auth/*.html" style="shape=folder;tabWidth=110;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="590" y="130" width="350" height="240" as="geometry"/>
         </mxCell>
-        <mxCell id="app" value="app.py&#xa;маршруты, модели, бизнес-логика" style="shape=folder;tabWidth=90;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="950" y="190" width="310" height="210" as="geometry"/>
+        <mxCell id="static" value="static&#xa;статические ресурсы&#xa;&#xa;• css/main.css&#xa;• css/animations.css&#xa;• js/main.js&#xa;• images/properties" style="shape=folder;tabWidth=100;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="590" y="470" width="350" height="240" as="geometry"/>
         </mxCell>
-        <mxCell id="config" value="config.py&#xa;параметры приложения" style="shape=folder;tabWidth=90;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="950" y="500" width="310" height="140" as="geometry"/>
+        <mxCell id="app" value="app.py&#xa;серверное приложение&#xa;&#xa;• маршруты Flask&#xa;• модели User и Listing&#xa;• авторизация&#xa;• CRUD объявлений&#xa;• API городов и типов" style="shape=folder;tabWidth=95;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="250" width="390" height="270" as="geometry"/>
         </mxCell>
-        <mxCell id="instance" value="instance&#xa;SQLite database: real_estate.db" style="shape=folder;tabWidth=90;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="540" y="560" width="300" height="140" as="geometry"/>
+        <mxCell id="config" value="config.py&#xa;конфигурация&#xa;&#xa;• SECRET_KEY&#xa;• DATABASE_URL&#xa;• UPLOAD_FOLDER&#xa;• ALLOWED_EXTENSIONS" style="shape=folder;tabWidth=95;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="700" width="390" height="210" as="geometry"/>
         </mxCell>
-        <mxCell id="external" value="Внешние библиотеки&#xa;Flask, Flask-Login, SQLAlchemy, Bootstrap" style="shape=folder;tabWidth=120;tabHeight=24;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="520" width="310" height="160" as="geometry"/>
+        <mxCell id="instance" value="instance&#xa;уровень данных&#xa;&#xa;SQLite database:&#xa;real_estate.db" style="shape=folder;tabWidth=95;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="590" y="800" width="350" height="190" as="geometry"/>
         </mxCell>
-        <mxCell id="e_client_templates" value="HTTP-запросы / HTML-ответы" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="client" target="templates">
+        <mxCell id="external" value="Внешние библиотеки&#xa;зависимости проекта&#xa;&#xa;• Flask&#xa;• Flask-Login&#xa;• SQLAlchemy&#xa;• Bootstrap" style="shape=folder;tabWidth=150;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;fillColor=#f5f5f5;strokeColor=#666666;fontSize=16;spacing=12;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="700" width="350" height="230" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_client_templates" value="HTML-ответы" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="templates" target="client">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="210" as="sourcePoint"/>
+            <mxPoint x="480" y="210" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_client_static" value="CSS, JS, изображения" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="static" target="client">
+          <mxGeometry relative="1" as="geometry">
+            <mxArray as="points">
+              <mxPoint x="500" y="590"/>
+              <mxPoint x="500" y="360"/>
+            </mxArray>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_app_templates" value="render_template()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="templates">
+          <mxGeometry relative="1" as="geometry">
+            <mxArray as="points">
+              <mxPoint x="1030" y="290"/>
+              <mxPoint x="1030" y="250"/>
+            </mxArray>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_app_static" value="сохранение файлов" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="static">
+          <mxGeometry relative="1" as="geometry">
+            <mxArray as="points">
+              <mxPoint x="1030" y="440"/>
+              <mxPoint x="1030" y="590"/>
+            </mxArray>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_app_instance" value="SQLAlchemy ORM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="instance">
+          <mxGeometry relative="1" as="geometry">
+            <mxArray as="points">
+              <mxPoint x="1320" y="630"/>
+              <mxPoint x="765" y="630"/>
+            </mxArray>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_app_config" value="читает настройки" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="config">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e_client_static" value="загрузка ресурсов" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="client" target="static">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_templates_app" value="render_template" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="app" target="templates">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_app_static" value="сохранение изображений" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="app" target="static">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_app_db" value="SQLAlchemy ORM" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="app" target="instance">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_app_config" value="читает настройки" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="app" target="config">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_app_external" value="использует API" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="app" target="external">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e_templates_static" value="url_for(static)" style="endArrow=block;html=1;rounded=0;fontSize=12;" edge="1" parent="1" source="templates" target="static">
-          <mxGeometry relative="1" as="geometry"/>
+        <mxCell id="e_app_external" value="использует API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;fontSize=13;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="external">
+          <mxGeometry relative="1" as="geometry">
+            <mxArray as="points">
+              <mxPoint x="1315" y="1050"/>
+              <mxPoint x="255" y="1050"/>
+            </mxArray>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
